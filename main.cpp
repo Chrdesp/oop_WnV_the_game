@@ -1,37 +1,34 @@
-#include "classes.h"
+
+//
+// Created by Themos Papatheofanous on 4/12/22.
+//
+
 #include <iostream>
 #include <Windows.h>
-#include <vector>
+#include "header.h"
 using namespace std;
 
+int main() {
+    Map map1;
+    map1.Populate_Map();
+    bool game_playing = true;
+    bool pause = false;
+    while (game_playing) {
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,0 });
+        map1.Display_map();
+        system("pause>nul");
+        if (GetKeyState(VK_UP) & 0x8000) map1.movement(-1, 0);
+        if (GetKeyState(VK_DOWN) & 0x8000) map1.movement(1, 0);
+        if (GetKeyState(VK_LEFT) & 0x8000) map1.movement(0, -1);
+        if (GetKeyState(VK_RIGHT) & 0x8000) map1.movement(0, 1);
+        if (GetKeyState(VK_F1) & 0x8000) game_playing = false;
+        if (GetKeyState(VK_F2) & 0x8000) pause = true;
 
-int  main() {
-	Avatar a;
-
-	srand(time(NULL));
-	 int  num ;
-	cout << "\n how many vampires/werewolfs do you want;" << endl;
-	cin >> num;
-	
-	vector<Vampire> vamp;
-	vector<Werewolf> wer;
-	cout << "\nVampires:" << endl;
-	for (int i = 0; i <= num; i++) {
-		Vampire v;
-		vamp.push_back(v);
-		i++;
-	}
-	cout << "\nWerewolves:" << endl;
-	for (int i = 0; i <= num; i++) {
-		Werewolf w;
-		wer.push_back(w);
-		i++;
-	}
-	
-	
-
-	//cout << "\npower=" << f.get_power() << "\ndefence=" << f.get_defence() << "\ngiatriko=" << f.get_giatriko() << endl;
-
-		
-
+        while (pause) {
+            system("pause");
+            pause = false;
+            system("cls");
+        }
+    }
+    return 0;
 }
